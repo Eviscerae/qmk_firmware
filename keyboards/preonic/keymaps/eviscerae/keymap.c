@@ -16,6 +16,13 @@
 #include QMK_KEYBOARD_H
 #include "muse.h"
 
+
+#ifdef RGBLIGHT_ENABLE
+//Following line allows macro to read current RGB settings
+extern rgblight_config_t rgblight_config;
+#endif
+
+
 enum preonic_layers {
   _QWERTY = 0,
   _DFLT_1,
@@ -213,6 +220,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,  KC_NO,    KC_NO,    KC_NO,    KC_NO,         KC_NO,         KC_NO,    L_DSKTP,  SFTALT_UP, SFTALT_DN, R_DSKTP)
 };
 
+/* RGB settings used when changing layer */
+static uint8_t mode;
+static uint8_t hue;
+static uint8_t sat;
+static uint8_t val;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -239,6 +251,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_on(_LOWER);
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
             update_tri_layer(_LOWER, _COMBOS, _COMBOS);
+            #ifdef RGBLIGHT_ENABLE
+            mode = rgblight_config.mode;
+            hue = rgblight_config.hue;
+            sat = rgblight_config.sat;
+            val = rgblight_config.val;
+            rgblight_mode(1);
+            rgblight_sethsv(hue, sat, val);
+            rgblight_mode(mode);
+	        #endif
           } else {
             layer_off(_LOWER);
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
@@ -251,7 +272,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_on(_RAISE);
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
             update_tri_layer(_COMBOS, _RAISE, _COMBOS);
-           } else {
+            #ifdef RGBLIGHT_ENABLE
+            mode = rgblight_config.mode;
+            hue = rgblight_config.hue;
+            sat = rgblight_config.sat;
+            val = rgblight_config.val;
+            rgblight_mode(1);
+            rgblight_sethsv(hue, sat, val);
+            rgblight_mode(mode);
+	        #endif
+          } else {
             layer_off(_RAISE);
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
             update_tri_layer(_COMBOS, _RAISE, _COMBOS);
@@ -260,17 +290,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case ADJUST:
           if (record->event.pressed) {
-              layer_on(_ADJUST);
+            layer_on(_ADJUST);
+            #ifdef RGBLIGHT_ENABLE
+            mode = rgblight_config.mode;
+            hue = rgblight_config.hue;
+            sat = rgblight_config.sat;
+            val = rgblight_config.val;
+            rgblight_mode(1);
+            rgblight_sethsv(hue, sat, val);
+            rgblight_mode(mode);
+	        #endif
           } else {
-              layer_off(_ADJUST);
+            layer_off(_ADJUST);
           }
           return false;
           break;
         case COMBOS:
           if (record->event.pressed) {
-              layer_on(_COMBOS);
+            layer_on(_COMBOS);
+            #ifdef RGBLIGHT_ENABLE
+            mode = rgblight_config.mode;
+            hue = rgblight_config.hue;
+            sat = rgblight_config.sat;
+            val = rgblight_config.val;
+            rgblight_mode(1);
+            rgblight_sethsv(hue, sat, val);
+            rgblight_mode(mode);
+	        #endif
           } else {
-              layer_off(_COMBOS);
+            layer_off(_COMBOS);
           }
           return false;
           break;
@@ -332,6 +380,8 @@ void dip_switch_update_user(uint8_t index, bool active) {
 
 
 void matrix_scan_user(void) {
+
+rgblight_config.raw = eeconfig_read_rgblight();
 #ifdef AUDIO_ENABLE
     if (muse_mode) {
         if (muse_counter == 0) {
