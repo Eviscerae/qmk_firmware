@@ -16,7 +16,6 @@
 #include QMK_KEYBOARD_H
 #include "muse.h"
 
-
 #ifdef RGBLIGHT_ENABLE
 //Following line allows macro to read current RGB settings
 extern rgblight_config_t rgblight_config;
@@ -252,14 +251,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
             update_tri_layer(_LOWER, _COMBOS, _COMBOS);
             #ifdef RGBLIGHT_ENABLE
-            mode = rgblight_config.mode;
-            hue = rgblight_config.hue;
-            sat = rgblight_config.sat;
-            val = rgblight_config.val;
-            rgblight_mode(1);
-            rgblight_sethsv(hue, sat, val);
-            rgblight_mode(mode);
-	        #endif
+                mode = rgblight_config.mode;
+                hue = rgblight_config.hue;
+                sat = rgblight_config.sat;
+                val = rgblight_config.val;
+                rgblight_mode(1);
+                rgblight_sethsv(hue, sat, val);
+                rgblight_mode(mode);
+            #endif // RGBLIGHT_ENABLE
           } else {
             layer_off(_LOWER);
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
@@ -273,33 +272,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
             update_tri_layer(_COMBOS, _RAISE, _COMBOS);
             #ifdef RGBLIGHT_ENABLE
-            mode = rgblight_config.mode;
-            hue = rgblight_config.hue;
-            sat = rgblight_config.sat;
-            val = rgblight_config.val;
-            rgblight_mode(1);
-            rgblight_sethsv(hue, sat, val);
-            rgblight_mode(mode);
-	        #endif
+                mode = rgblight_config.mode;
+                hue = rgblight_config.hue;
+                sat = rgblight_config.sat;
+                val = rgblight_config.val;
+                rgblight_mode(1);
+                rgblight_sethsv(hue, sat, val);
+                rgblight_mode(mode);
+            #endif // RGBLIGHT_ENABLE
           } else {
             layer_off(_RAISE);
             update_tri_layer(_LOWER, _RAISE, _ADJUST);
             update_tri_layer(_COMBOS, _RAISE, _COMBOS);
-           }
+          }
           return false;
           break;
         case ADJUST:
           if (record->event.pressed) {
             layer_on(_ADJUST);
             #ifdef RGBLIGHT_ENABLE
-            mode = rgblight_config.mode;
-            hue = rgblight_config.hue;
-            sat = rgblight_config.sat;
-            val = rgblight_config.val;
-            rgblight_mode(1);
-            rgblight_sethsv(hue, sat, val);
-            rgblight_mode(mode);
-	        #endif
+                mode = rgblight_config.mode;
+                hue = rgblight_config.hue;
+                sat = rgblight_config.sat;
+                val = rgblight_config.val;
+                rgblight_mode(1);
+                rgblight_sethsv(hue, sat, val);
+                rgblight_mode(mode);
+            #endif // RGBLIGHT_ENABLE
           } else {
             layer_off(_ADJUST);
           }
@@ -309,14 +308,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (record->event.pressed) {
             layer_on(_COMBOS);
             #ifdef RGBLIGHT_ENABLE
-            mode = rgblight_config.mode;
-            hue = rgblight_config.hue;
-            sat = rgblight_config.sat;
-            val = rgblight_config.val;
-            rgblight_mode(1);
-            rgblight_sethsv(hue, sat, val);
-            rgblight_mode(mode);
-	        #endif
+                mode = rgblight_config.mode;
+                hue = rgblight_config.hue;
+                sat = rgblight_config.sat;
+                val = rgblight_config.val;
+                rgblight_mode(1);
+                rgblight_sethsv(hue, sat, val);
+                rgblight_mode(mode);
+            #endif // RGBLIGHT_ENABLE
           } else {
             layer_off(_COMBOS);
           }
@@ -380,8 +379,9 @@ void dip_switch_update_user(uint8_t index, bool active) {
 
 
 void matrix_scan_user(void) {
-
-rgblight_config.raw = eeconfig_read_rgblight();
+#ifdef RGBLIGHT_ENABLE
+    rgblight_config.raw = eeconfig_read_rgblight();
+#endif
 #ifdef AUDIO_ENABLE
     if (muse_mode) {
         if (muse_counter == 0) {
