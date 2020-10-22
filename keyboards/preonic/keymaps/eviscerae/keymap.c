@@ -333,20 +333,14 @@ uint8_t muse_offset = 70;
 uint16_t muse_tempo = 50;
 
 void encoder_update_user(uint8_t index, bool clockwise) {
-  if (index == 1) {
+  if (index == 0) {
     if (IS_LAYER_ON(_QWERTY)) {
       if (clockwise) {
-        tap_code(KC_VOLU);
+        tap_code(KC_MS_WH_DOWN);
       } else {
-        tap_code(KC_VOLD);
+        tap_code(KC_MS_WH_UP);
       }
     } else if(IS_LAYER_ON(_LOWER)){
-      if (clockwise) {
-        tap_code(KC_PGUP);
-      } else {
-        tap_code(KC_PGDN);
-      }
-    } else if(IS_LAYER_ON(_RAISE)){
       if (clockwise) {
         // Using the 16-bit version of this method to allow for the use
         // of CTRL / SHFT / ALT macros
@@ -355,6 +349,12 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         // Using the 16-bit version of this method to allow for the use
         // of CTRL / SHFT / ALT macros
         tap_code16(LCTL(LGUI(KC_LEFT)));
+      }
+    } else if(IS_LAYER_ON(_RAISE)){
+      if (clockwise) {
+        tap_code(KC_AUDIO_VOL_UP);
+      } else {
+        tap_code(KC_AUDIO_VOL_DOWN);
       }
     }
   }

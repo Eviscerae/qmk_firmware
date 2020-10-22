@@ -10,6 +10,10 @@
                                 }
 #endif
 
+/* With the small +/-2 volume adjustment that Windows does, 16ms or shorter delays causes windows to sometimes drop successive pulses.
+// therefore, set this value to 20ms */
+#define TAP_CODE_DELAY 20
+
 #define MUSIC_MASK (keycode != KC_NO)
 
 /*
