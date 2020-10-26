@@ -146,6 +146,22 @@
  */
 #define USSR_ANTHEM B__NOTE(_G6), B__NOTE(_C7), W__NOTE(_G6), H__NOTE(_A6), B__NOTE(_B6), W__NOTE(_E6), W__NOTE(_E6), B__NOTE(_A6), W__NOTE(_G6), H__NOTE(_F6), B__NOTE(_G6), W__NOTE(_C6), W__NOTE(_C6), B__NOTE(_D6), W__NOTE(_D6), W__NOTE(_E6), B__NOTE(_D6), W__NOTE(_D6), W__NOTE(_G6), B__NOTE(_F6), W__NOTE(_G6), W__NOTE(_A6), B__NOTE(_B6),
 
+/* Title:            Never Gonna Give you Up
+ * Author/Composer:  Rick Astley
+ * License:          RCA Music
+ */
+#define NEVER_GONNA_GIVE_YOU_UP Q__NOTE(_F4), Q__NOTE(_G4), Q__NOTE(_BF4), Q__NOTE(_G4), HD_NOTE(_D5), HD_NOTE(_D5), W__NOTE(_C5), S__NOTE(_REST), Q__NOTE(_F4), Q__NOTE(_G4), Q__NOTE(_BF4), Q__NOTE(_G4), HD_NOTE(_C5), HD_NOTE(_C5), W__NOTE(_BF4), S__NOTE(_REST), Q__NOTE(_F4), Q__NOTE(_G4), Q__NOTE(_BF4), Q__NOTE(_G4), W__NOTE(_BF4), H__NOTE(_C5), H__NOTE(_A4), H__NOTE(_A4), H__NOTE(_G4), H__NOTE(_F4), H__NOTE(_F4), W__NOTE(_C5), W__NOTE(_BF4),
+
+/* Title:            Blue (Da Ba Dee)
+ * Author/Composer:  Eiffel 65
+ * License:          Bliss Corporation
+ */
+#define IM_BLUE W__NOTE(_A4), \
+H__NOTE(_BF4), H__NOTE(_D4), H__NOTE(_G4), H__NOTE(_BF4), H__NOTE(_C5), H__NOTE(_F4), H__NOTE(_A4), H__NOTE(_BF4), H__NOTE(_BF4), H__NOTE(_G4), H__NOTE(_BF4), H__NOTE(_D5), H__NOTE(_E5), H__NOTE(_G4), H__NOTE(_D5), H__NOTE(_C5), \
+H__NOTE(_BF4), H__NOTE(_D4), H__NOTE(_G4), H__NOTE(_BF4), H__NOTE(_C5), H__NOTE(_F4), H__NOTE(_A4), H__NOTE(_BF4), H__NOTE(_BF4), H__NOTE(_G4), H__NOTE(_BF4), H__NOTE(_D5), H__NOTE(_E5), H__NOTE(_G4), H__NOTE(_D5), H__NOTE(_C5), \
+H__NOTE(_BF4), H__NOTE(_D4), H__NOTE(_G4), H__NOTE(_BF4), H__NOTE(_C5), H__NOTE(_F4), H__NOTE(_A4), H__NOTE(_BF4), H__NOTE(_BF4), H__NOTE(_G4), H__NOTE(_BF4), H__NOTE(_D5), H__NOTE(_E5), H__NOTE(_G4), H__NOTE(_D5), H__NOTE(_C5), \
+H__NOTE(_BF4), H__NOTE(_D4), H__NOTE(_G4), H__NOTE(_BF4), H__NOTE(_A4), H__NOTE(_C4), H__NOTE(_F4), H__NOTE(_G4),  H__NOTE(_G4),  H__NOTE(_C4), H__NOTE(_F4),  W__NOTE(_G4), H__NOTE(_F4), H__NOTE(_G4),  H__NOTE(_A4),
+
 /* Removed sounds
  +   This list is here solely for compatibility, so that removed songs don't just break things
  *   If you think that any of these songs were wrongfully removed, let us know and provide
