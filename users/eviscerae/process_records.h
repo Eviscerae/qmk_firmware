@@ -53,6 +53,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
 #define LOWER   MO(_LOWER)
 #define RAISE   MO(_RAISE)
 #define ADJUST  MO(_ADJUST)
+#define COMBOS  MO(_COMBOS)
 #define TG_MODS TG(_MODS)
 #define TG_GAME TG(_GAMEPAD)
 #define OS_LWR  OSL(_LOWER)
@@ -79,6 +80,34 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
 #else  // SWAP_HANDS_ENABLE
 #    define KC_C1R3 KC_TAB
 #endif  // SWAP_HANDS_ENABLE
+
+/* Desktop Switching Definitions */
+#define L_DSKTP LCTL(LGUI(KC_LEFT))
+#define R_DSKTP LCTL(LGUI(KC_RIGHT))
+
+/* Control Combo Definitions */
+#define CTL_A LCTL(KC_A)
+#define CTL_S LCTL(KC_S)
+#define CTL_D LCTL(KC_D)
+#define CTL_F LCTL(KC_F)
+#define CTL_Z LCTL(KC_Z)
+#define CTL_X LCTL(KC_X)
+#define CTL_C LCTL(KC_C)
+#define CTL_V LCTL(KC_V)
+#define CTRL_Y LCTL(KC_Y)
+#define TASKMAN LCTL(LSFT(KC_ESC))
+
+/* Shift Combo Definitions */
+#define SHFT_HME LSFT(KC_HOME)
+#define SHFT_END LSFT(KC_END)
+#define SFTALT_UP LSFT(LALT(KC_UP))
+#define SFTALT_DN LSFT(LALT(KC_DOWN))
+
+/* Teams Combo Definitions */
+#define TMS_MUTE LCTL(LSFT(KC_M))
+
+/* Windows Combo Definitions */
+#define WIN_LOCK LGUI(KC_L)
 
 #define BK_LWER LT(_LOWER, KC_BSPC)
 #define SP_LWER LT(_LOWER, KC_SPC)

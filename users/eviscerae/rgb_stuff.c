@@ -122,7 +122,7 @@ static bool is_enabled;
 static bool is_rgblight_startup;
 static uint8_t old_hue;
 static uint16_t rgblight_startup_loop_timer;
-#endif
+#endif  // RGBLIGHT_STARTUP_ANIMATION
 
 void keyboard_post_init_rgb_light(void) {
 #if defined(RGBLIGHT_STARTUP_ANIMATION)
@@ -136,14 +136,14 @@ void keyboard_post_init_rgb_light(void) {
         rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
         is_rgblight_startup = true;
     }
-#endif
+#endif  // RGBLIGHT_STARTUP_ANIMATION
     layer_state_set_rgb_light(layer_state);
 }
 
 void matrix_scan_rgb_light(void) {
-#    ifdef RGBLIGHT_TWINKLE
+#ifdef RGBLIGHT_TWINKLE
     scan_rgblight_fadeout();
-#    endif  // RGBLIGHT_ENABLE
+#endif  // RGBLIGHT_ENABLE
 
 #if defined(RGBLIGHT_STARTUP_ANIMATION)
     if (is_rgblight_startup && is_keyboard_master()) {
@@ -190,13 +190,16 @@ layer_state_t layer_state_set_rgb_light(layer_state_t state) {
                 rgblight_set_hsv_and_mode(HSV_RED, RGBLIGHT_MODE_BREATHING + 3);
                 break;
             case _RAISE:
-                rgblight_set_hsv_and_mode(HSV_PURPLE, RGBLIGHT_MODE_RGB_TEST + 4);
+                rgblight_set_hsv_and_mode(HSV_PURPLE, RGBLIGHT_MODE_SNAKE + 5);
                 break;
             case _LOWER:
-                rgblight_set_hsv_and_mode(HSV_PURPLE, RGBLIGHT_MODE_RGB_TEST + 4);
+                rgblight_set_hsv_and_mode(HSV_PURPLE, RGBLIGHT_MODE_SNAKE + 4);
                 break;
             case _ADJUST:
-                rgblight_set_hsv_and_mode(HSV_RED, RGBLIGHT_MODE_BREATHING + 3);
+                rgblight_set_hsv_and_mode(HSV_RED, RGBLIGHT_MODE_RGB_TEST + 4);
+                break;
+            case _COMBOS:
+                rgblight_set_hsv_and_mode(HSV_YELLOW, RGBLIGHT_MODE_BREATHING + 3);
                 break;
             case _COLEMAK:
                 rgblight_set_hsv_and_mode(HSV_MAGENTA, mode);
@@ -220,12 +223,12 @@ layer_state_t layer_state_set_rgb_light(layer_state_t state) {
                 rgblight_set_hsv_and_mode(HSV_BLUE, mode);
                 break;
             default:
-                // Blue Preonic
-                rgblight_set_hsv_and_mode(HSV_CYAN, RGBLIGHT_MODE_RGB_TEST + 4);
-                // Sunset Preonic
-                // rgblight_set_hsv_and_mode(HSV_CYAN, RGBLIGHT_MODE_RGB_TEST + 4);
-                // Tokyo60
-                // rgblight_set_hsv_and_mode(HSV_CYAN, RGBLIGHT_MODE_RGB_TEST + 4);
+#ifdef RESTINGCOLOR
+                rgblight_set_hsv_and_mode(RESTINGCOLOR, RGBLIGHT_MODE_RGB_TEST + 4);
+#else
+                rgblight_set_hsv_and_mode(HSV_WHITE, RGBLIGHT_MODE_RGB_TEST + 4);
+#endif  // RESTINGCOLOR
+
                 break;
         }
     }
